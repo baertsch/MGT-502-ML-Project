@@ -39,9 +39,6 @@ if "page" not in st.session_state:
 
 
 if st.session_state.page == "home":
-    st.title("Welcome to ReaddingBuddy")
-    
-    st.text("A book recommendation system that helps you find your next read!")
     st.markdown(
         """
         <style>
@@ -61,6 +58,10 @@ if st.session_state.page == "home":
         """, 
         unsafe_allow_html=True
     )
+    st.title("Welcome to ReaddingBuddy")
+    
+    st.text("A book recommendation system that helps you find your next read!")
+    
 
     col1, col2, col3 = st.columns([1,2,1])
 
