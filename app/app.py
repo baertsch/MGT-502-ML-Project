@@ -4,17 +4,12 @@ import pandas as pd
 st.markdown(
     """
     <style>
-    body {
-        background-color: #faf3e2;
-    }
     .stButton>button {
-        background-color: #e6c28a;  /* Green button */
+        background-color: #e6c28a;
         color: black;
         border-radius: 10px;
-    }
-    .stTextInput>div>input {
-        background-color: #ffffff;
-        border: 1px solid #ccc;
+        padding: 10px 20px;
+        font-size: 18px;
     }
     </style>
     """, 
@@ -27,12 +22,15 @@ read = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads
 item = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/items_df.csv'
 data = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/item_to_item_recommendations.csv'
 logo = 'https://github.com/baertsch/MGT-502-ML-Project/blob/main/app/image/Logo.png?raw=true'
+book_cover = 'https://github.com/baertsch/MGT-502-ML-Project/blob/main/app/image/book_cover.png?raw=true'
 
 df = pd.read_csv(url)
 read_df = pd.read_csv(read)
 item_df = pd.read_csv(item)
 data = pd.read_csv(data)
-
+pop_books = read_df.groupby('i').size().reset_index(name='count')
+pop_books = pop_books.sort_values(by='count', ascending=False)
+pop_books_idx = pop_books.iloc[:10]['i'].values.tolist()
 
 
 if "page" not in st.session_state:
@@ -40,44 +38,54 @@ if "page" not in st.session_state:
 
 
 if st.session_state.page == "home":
-    st.markdown(
-        """
-        <style>
-        body {
-            background-color: #faf3e2;
-        }
-        .stButton>button {
-            background-color: #e6c28a;  /* Green button */
-            color: black;
-            border-radius: 10px;
-        }
-        .stTextInput>div>input {
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-        }
-        </style>
-        """, 
-        unsafe_allow_html=True
-    )
+    
     st.title("Welcome to ReaddingBuddy!")
     
     st.text("A book recommendation system that helps you find your next read!")
-    
+    st.image(logo, width=400)
+    st.markdown("---")
+    st.subheader("The most popular books in our library:")
+    n_cols = 3
+    cols = st.columns(n_cols)
+    for idx, book_id in enumerate(pop_books_idx):
+        book_row = item_df[item_df['i'] == book_id][['Title', 'Author', 'Publisher', 'Synopsis', 'Image']]
+        if not book_row.empty:
+            img_url = book_row['Image'].values[0]
+            title = book_row['Title'].values[0]
+            author = book_row['Author'].values[0]
+            publisher = book_row['Publisher'].values[0]
+            synopsis = book_row['Synopsis'].values[0]
+            col = cols[idx % n_cols]
+            if isinstance(img_url, str) and img_url.strip() != "":
+                col.image(img_url, width=100)
+            else:
+                col.image('https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg', width=100)
+            with col.expander(title):
+                st.write(f"**Author:** {author}")
+                st.write(f"**Publisher:** {publisher}")
+                st.write(f"**Synopsis:** {synopsis}")
+    st.markdown("---")
 
-    col1, col2, col3 = st.columns([1,2,1])
+    col1, col2, col3 = st.columns([1,4,2])
 
     with col2: 
+<<<<<<< HEAD
+=======
         st.image(logo, width=400)
+>>>>>>> 30252b731a36caeafaf745899eea311f1d4e5c92
         st.text("Do you have an existing userId?")
         login_checked = st.checkbox("Yes, login here", value=False, key="login")
         recommend = st.checkbox("No, access recommendation based on book", value=False, key="recommend")
+    
+    #st.markdown("<br><br><br>", unsafe_allow_html=True)
     with col3:
-        st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
+        st.markdown("<br><br><br><br><br>", unsafe_allow_html=True) 
         if st.button("Get Started", key="get_started"):
             if login_checked:
                 st.session_state.page = "login"
             elif st.session_state.recommend:
                 st.session_state.page = "recommend"
+
 
 
 elif st.session_state.page == "login":
