@@ -42,6 +42,25 @@ if st.session_state.page == "home":
     st.title("Welcome to ReaddingBuddy")
     
     st.text("A book recommendation system that helps you find your next read!")
+    st.markdown(
+        """
+        <style>
+        body {
+            background-color: #faf3e2;
+        }
+        .stButton>button {
+            background-color: #e6c28a;  /* Green button */
+            color: black;
+            border-radius: 10px;
+        }
+        .stTextInput>div>input {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+        }
+        </style>
+        """, 
+        unsafe_allow_html=True
+    )
 
     col1, col2, col3 = st.columns([1,2,1])
 
