@@ -26,6 +26,7 @@ url = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/
 read = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/interactions_train.csv'
 item = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/items_df.csv'
 data = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/item_to_item_recommendations.csv'
+logo = 'https://github.com/baertsch/MGT-502-ML-Project/blob/main/app/image/Logo.png?raw=true'
 
 df = pd.read_csv(url)
 read_df = pd.read_csv(read)
@@ -66,7 +67,7 @@ if st.session_state.page == "home":
     col1, col2, col3 = st.columns([1,2,1])
 
     with col2: 
-        st.image('./image/logo.png', width=400)
+        st.image(logo, width=400)
         st.text("Do you have an existing userId?")
         login_checked = st.checkbox("Yes, login here", value=False, key="login")
         recommend = st.checkbox("No, access recommendation based on book", value=False, key="recommend")
@@ -81,7 +82,7 @@ if st.session_state.page == "home":
 
 elif st.session_state.page == "login":
     col1, col2, col3 = st.columns([1,1,1])
-    col2.image('./image/logo.png', width=200)
+    col2.image(logo, width=200)
     st.header("User Recommender specifically targeted for you!")
     if col1.button("Back to Home"):
         st.session_state.page = "home"
@@ -150,7 +151,7 @@ elif st.session_state.page == "login":
 
 elif st.session_state.page == "recommend":
     col1, col2, col3 = st.columns([1,1,1])
-    col2.image('./image/logo.png', width=200)
+    col2.image(logo, width=200)
     st.header("Recommendation based on a book you like!")
     if  col1.button("Back to Home"):
         st.session_state.page = "home"
