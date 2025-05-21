@@ -58,7 +58,7 @@ if st.session_state.page == "home":
         """, 
         unsafe_allow_html=True
     )
-    st.title("Welcome to ReaddingBuddy")
+    st.title("Welcome to ReaddingBuddy!")
     
     st.text("A book recommendation system that helps you find your next read!")
     
@@ -151,7 +151,7 @@ elif st.session_state.page == "login":
 elif st.session_state.page == "recommend":
     col1, col2, col3 = st.columns([1,1,1])
     col2.image('./image/logo.png', width=200)
-    st.header("Recommendation based on a book you read!")
+    st.header("Recommendation based on a book you like!")
     if  col1.button("Back to Home"):
         st.session_state.page = "home"
     
