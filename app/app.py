@@ -59,7 +59,7 @@ if st.session_state.page == "home":
             if isinstance(img_url, str) and img_url.strip() != "":
                 col.image(img_url, width=100)
             else:
-                col.image('https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg', width=100)
+                col.image(book_cover, width=100)
             with col.expander(title):
                 st.write(f"**Author:** {author}")
                 st.write(f"**Publisher:** {publisher}")
@@ -69,10 +69,6 @@ if st.session_state.page == "home":
     col1, col2, col3 = st.columns([1,4,2])
 
     with col2: 
-<<<<<<< HEAD
-=======
-        st.image(logo, width=400)
->>>>>>> 30252b731a36caeafaf745899eea311f1d4e5c92
         st.text("Do you have an existing userId?")
         login_checked = st.checkbox("Yes, login here", value=False, key="login")
         recommend = st.checkbox("No, access recommendation based on book", value=False, key="recommend")
@@ -127,7 +123,7 @@ elif st.session_state.page == "login":
                     if isinstance(img_url, str) and img_url.strip() != "":
                         col.image(img_url, width=100)
                     else:
-                        col.image('https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg', width=100)
+                        col.image(book_cover, width=100)
                     with col.expander(title):
                         st.write(f"**Author:** {author}")
                         st.write(f"**Publisher:** {publisher}")
@@ -149,7 +145,7 @@ elif st.session_state.page == "login":
                     if isinstance(img_url, str) and img_url.strip() != "":
                         col.image(img_url, width=100)
                     else:
-                        col.image('https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg', width=100)
+                        col.image(book_cover, width=100)
                     with col.expander(title):
                         st.write(f"**Author:** {author}")
                         st.write(f"**Publisher:** {publisher}")
@@ -191,7 +187,7 @@ elif st.session_state.page == "recommend":
                     if isinstance(img_url, str) and img_url.strip() != "":
                         col.image(img_url, width=100)
                     else:
-                        col.image('https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg', width=100)
+                        col.image(book_cover, width=100)
                     with col.expander(title):
                         st.write(f"**Author:** {author}")
                         st.write(f"**Publisher:** {publisher}")
