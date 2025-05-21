@@ -5,22 +5,18 @@ import plotly.express as px
 url = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/hybrid_recommendation3.csv'
 read = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/interactions_train.csv'
 item = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/items_df.csv'
+data = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/item_to_item_recommendations.csv'
 
 df = pd.read_csv(url)
 read_df = pd.read_csv(read)
 item_df = pd.read_csv(item)
+data = pd.read_csv(data)
 
 
 
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
-# Navigation logic
-def go_to_login():
-    st.session_state.page = "login"
-
-def go_to_recommend():
-    st.session_state.page = "recommend"
 
 if st.session_state.page == "home":
     st.title("Welcome to ReaddingBuddy")
@@ -33,13 +29,15 @@ if st.session_state.page == "home":
         st.image('./image/logo.png', width=400)
         st.text("Do you have an existing userId?")
         login_checked = st.checkbox("Yes, login here", value=False, key="login")
-        st.checkbox("No, access recommendation based on book", value=False, key="recommend")
+        recommend = st.checkbox("No, access recommendation based on book", value=False, key="recommend")
     with col3:
         st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
         if st.button("Get Started", key="get_started"):
-            go_to_recommend()
-    if login_checked:
-        go_to_login()
+            if login_checked:
+                st.session_state.page = "login"
+            elif st.session_state.recommend:
+                st.session_state.page = "recommend"
+
 
 elif st.session_state.page == "login":
     col1, col2, col3 = st.columns([1,1,1])
@@ -113,9 +111,41 @@ elif st.session_state.page == "login":
 elif st.session_state.page == "recommend":
     col1, col2, col3 = st.columns([1,1,1])
     col2.image('./image/logo.png', width=200)
-    st.header("Recommendation Page")
+    st.header("Recommendation based on a book you read!")
     if  col1.button("Back to Home"):
         st.session_state.page = "home"
     
     st.markdown("---")
-    st.selectbox("Select a book", options=df['book_id'], key="book_id")
+    st.selectbox("Select a book", options=item_df['Title'], key="book_title")
+    if st.button("Get Recommendations"):
+        book_title = st.session_state.book_title
+        book_data = item_df[item_df['Title'] == book_title]
+        if not book_data.empty:
+            book_id = book_data['i'].values[0]
+            rec_data = data[data['item_id'] == book_id]
+            rec_str = rec_data['recommendation'].values[0]
+            rec_ids = [int(x) for x in rec_str.split(' ')]
+            
+            st.markdown("---")
+            st.subheader("The books recommended for you:")
+            n_cols = 3
+            cols = st.columns(n_cols)
+            for idx, book in enumerate(rec_ids):
+                book_row = item_df[item_df['i'] == book][['Title', 'Author', 'Publisher', 'Synopsis', 'Image']]
+                if not book_row.empty:
+                    img_url = book_row['Image'].values[0]
+                    title = book_row['Title'].values[0]
+                    author = book_row['Author'].values[0]
+                    publisher = book_row['Publisher'].values[0]
+                    synopsis = book_row['Synopsis'].values[0]
+                    col = cols[idx % n_cols]
+                    if isinstance(img_url, str) and img_url.strip() != "":
+                        col.image(img_url, width=100)
+                    else:
+                        col.image('https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg', width=100)
+                    with col.expander(title):
+                        st.write(f"**Author:** {author}")
+                        st.write(f"**Publisher:** {publisher}")
+                        st.write(f"**Synopsis:** {synopsis}") 
+        else:
+            st.write("No data found for the selected book.")
