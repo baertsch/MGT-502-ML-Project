@@ -22,7 +22,7 @@ read = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads
 item = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/items_df.csv'
 data = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/item_to_item_recommendations.csv'
 logo = 'https://github.com/baertsch/MGT-502-ML-Project/blob/main/app/image/Logo.png?raw=true'
-logo = 'https://github.com/baertsch/MGT-502-ML-Project/blob/main/app/image/book_cover.png?raw=true'
+book_cover = 'https://github.com/baertsch/MGT-502-ML-Project/blob/main/app/image/book_cover.png?raw=true'
 
 df = pd.read_csv(url)
 read_df = pd.read_csv(read)
@@ -69,6 +69,10 @@ if st.session_state.page == "home":
     col1, col2, col3 = st.columns([1,4,2])
 
     with col2: 
+<<<<<<< HEAD
+=======
+        st.image(logo, width=400)
+>>>>>>> 30252b731a36caeafaf745899eea311f1d4e5c92
         st.text("Do you have an existing userId?")
         login_checked = st.checkbox("Yes, login here", value=False, key="login")
         recommend = st.checkbox("No, access recommendation based on book", value=False, key="recommend")
