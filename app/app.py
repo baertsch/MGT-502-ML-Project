@@ -1,6 +1,27 @@
 import streamlit as st
 import pandas as pd
 
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #faf3e2;
+    }
+    .stButton>button {
+        background-color: #e6c28a;  /* Green button */
+        color: black;
+        border-radius: 10px;
+    }
+    .stTextInput>div>input {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+    }
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
+
+
 url = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/hybrid_recommendation3.csv'
 read = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/interactions_train.csv'
 item = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/items_df.csv'
