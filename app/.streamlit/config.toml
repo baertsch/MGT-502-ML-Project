@@ -1,0 +1,6 @@
+[theme]
+primaryColor = 'black'  # Customize the primary color for the theme
+backgroundColor = "#faf3e2"  # Set the background color
+secondaryBackgroundColor = "#e6c28a"  # Set the secondary background color
+textColor = "black"  # Set the text color
+font = "sans serif"  # Set the font
