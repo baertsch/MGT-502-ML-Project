@@ -1,8 +1,11 @@
 ### MGT-502-ML-Project
-# 
-__Group Tissot: Nadège Baertschi & Zélia Décaillet__
 
-# Recommendation System for Book Rentals
+__Group Tissot: Nadège Baertschi & Zélia Décaillet__
+_May 2025_
+
+# ReadingBuddy: Recommendation System for Book Rentals
+RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.streamlit.app/)
+---
 
 ## Introduction
 This project builds a recommendation system for a book rental platform. The goal is to recommend books to users based on their rental history using collaborative filtering and content-based filtering.
