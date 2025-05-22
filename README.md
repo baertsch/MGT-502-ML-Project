@@ -15,6 +15,7 @@ RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.strea
 ## Table of Contents
 **[Introduction](#introduction)**<br>
 **[Exploratory Data Analysis](#eda)**<br>
+**[Methodology](#methodology)**<br>
 --- 
 
 ## Introduction
@@ -22,7 +23,7 @@ RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.strea
 The joy of stumbling upon a story that grips us, a world we don’t want to leave, or a character that resonates, this is what makes reading magical. Yet, with so many books out there, finding that *perfect* next read can feel overwhelming. **ReadingBuddy** is here to make that discovery seamless and delightful.
 
 > **When we read for education or research, discovery becomes essential.**  
-The right book, the right reference, the right voice—these are not just helpful; they’re critical. But combing through massive catalogs, outdated systems, or relying solely on keyword search can be inefficient and frustrating. **ReadingBuddy** streamlines this process, helping users surface relevant sources efficiently and intelligently.
+The right book, the right reference, the right voice, these are not just helpful; they’re critical. But combing through massive catalogs, outdated systems, or relying solely on keyword search can be inefficient and frustrating. **ReadingBuddy** streamlines this process, helping users surface relevant sources efficiently and intelligently.
 
 Whether you're a passionate reader, a student, or a researcher, **ReadingBuddy is your companion**, helping you uncover books that matter *to you*.
 
@@ -110,11 +111,68 @@ Interestingly, we can see now that, albeit comics being still Top 1, we also hav
 
 First, we built a few basic models, Item-Item Collaborative Filtering, User-User Collaborative Filtering and Content-Based Filtering, on the data provided by Kaggle. 
 
-### Data Split
-We split our data
+### Data Splitting
+Rather than randomly splitting the dataset, we chose a **historical split** to simulate a real-world scenario where we train on past interactions and predict future ones.
+- **80% oldest interactions** → used for **training**
+- **20% most recent interactions** → used for **testing**
+
+This method ensures that our model never "sees the future" and is trained only on data that would have been available at the time of recommendation.
+
+### Building the Interaction Matrix
+Next, we constructed a **binary user-item interaction matrix**:
+
+- A **1** indicates that the user has interacted with the item
+- A **0** means no interaction
+
+This matrix is the core structure on which our collaborative filtering models operate.
+
+To better understand the data structure, we visualized the matrix as a **heatmap**, revealing clusters of active users and popular items, as well as the sparsity of the dataset—typical of recommendation systems.
+
+### Our Models
+**Now that our ingredients are ready, let the cooking begin!
+
+#### First Model 
+##### Item-Item Collaborative Filtering with Implicit Feedback
+In this approach, we calculate the **cosine similarity** between items based on user interactions. The idea is that if a user interacted with item $i'$, and item $i$ is similar to $i'$, the user might also like $i$.
+
+The predicted likelihood that user $u$ will interact with item $i$ is given by:
+
+$$
+P_u(i) = \frac{\sum\limits_{i' \in I} \text{sim}(i, i') \cdot R_u(i')}{\sum\limits_{i' \in I} \text{sim}(i, i')}
+$$
+
+**Explanation:**
+- $P_u(i)$: predicted likelihood of user $u$ interacting with item $i$
+- $\text{sim}(i, i')$: cosine similarity between item $i$ and item $i'$
+- $R_u(i')$: 1 if user $u$ has interacted with item $i'$, 0 otherwise
+- $I$: set of all items
+
+This value $P_u(i)$ lies between 0 and 1, and represents how strong the recommendation is.
+
+---
+
+#### Second Model
+##### User-User Collaborative Filtering
+
+Next, we explored the **user-user collaborative filtering** approach. Here, we compute the **cosine similarity** between users based on their item interactions.
+
+The logic: if user $u'$ is similar to user $u$, and $u'$ interacted with item $i$, then $u$ might be interested in item $i$ too.
+
+The predicted score is computed as:
+
+$$
+P_u(i) = \frac{\sum\limits_{u' \in U} \text{sim}(u, u') \cdot R_{u'}(i)}{\sum\limits_{u' \in U} \text{sim}(u, u')}
+$$
+
+**Explanation:**
+- $P_u(i)$: likelihood of user $u$ interacting with item $i$
+- $\text{sim}(u, u')$: cosine similarity between users $u$ and $u'$
+- $R_{u'}(i)$: 1 if user $u'$ interacted with item $i$, 0 otherwise
+- $U$: set of all users
+
+---
 
 ## Model Comparison
-
 | Model                                | Precision@10 | Recall@10 |
 |--------------------------------------|--------------|-----------|
 | User-User Collaborative Filtering    | 0.45         | 0.38      |
