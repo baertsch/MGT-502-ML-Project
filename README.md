@@ -8,6 +8,7 @@ _May 2025_
 
 # ReadingBuddy: Recommendation System for Book Rentals
 > _"Find your next favorite book with ease!"_
+
 RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.streamlit.app/)
 ---
 
