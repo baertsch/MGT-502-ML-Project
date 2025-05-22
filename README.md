@@ -19,7 +19,7 @@ The joy of stumbling upon a story that grips us, a world we don’t want to leav
 > **When we read for education or research, discovery becomes essential.**  
 The right book, the right reference, the right voice—these are not just helpful; they’re critical. But combing through massive catalogs, outdated systems, or relying solely on keyword search can be inefficient and frustrating. **ReadingBuddy** streamlines this process, helping users surface relevant sources efficiently and intelligently.
 
-Whether you're a passionate reader, a student, or a researcher, **ReadingBuddy is your AI-powered companion**, helping you uncover books that matter—*to you*.
+Whether you're a passionate reader, a student, or a researcher, **ReadingBuddy is your companion**, helping you uncover books that matter—*to you*.
 
 ## Dataset Provided by Kaggle
 
