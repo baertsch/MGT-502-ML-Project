@@ -12,6 +12,11 @@ _May 2025_
 RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.streamlit.app/)
 ---
 
+## Table of Contents
+**[Introduction](#introduction)**<br>
+**[Exploratory Data Analysis](#eda)**<br>
+--- 
+
 ## Introduction
 > **When we read for leisure, everything is about discovery.**  
 The joy of stumbling upon a story that grips us, a world we don’t want to leave, or a character that resonates, this is what makes reading magical. Yet, with so many books out there, finding that *perfect* next read can feel overwhelming. **ReadingBuddy** is here to make that discovery seamless and delightful.
@@ -30,7 +35,7 @@ The dataset powering ReadingBuddy consists of:
 - `15,291` unique books in the library, which means `182` books have not been read by anyone from the dataset yet.
 - Metadata for each book: `Title`, `Author`, `Publisher`, `Subjects`, `ISBN`
 
-## Exploratory Data Analysis (EDA)
+## EDA
 
 Before diving into modeling, we explored our data deeply to understand its shape, quality, and potential.
 
@@ -51,7 +56,7 @@ This discrepancy between the average and the median can be explained by the skew
 - **Minimum**: `0`
 - **Number of books never interacted with**: `182`
 <img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/interactions_per_item.png?raw=true" alt="description" width="800" />
-This shows a typical __long-tail distribution__, where a few popular books are heavily engaged with, while most remain under the radar.
+This shows a typical long-tail distribution, where a few popular books are heavily engaged with, while most remain under the radar.
 
 ### What are the 10 most popular books?
 We analyzed which books users engaged with the most:
@@ -72,13 +77,41 @@ We analyzed which books users engaged with the most:
 More details, such as book cover and abstract, can be found on the home page of our app. Go check it out! You can also notice the popularity of Manga books!
 
 ### What about the top 10 Authors with the most books?
-<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/top_10_auhtors.png?raw=true" alt="description" width="800" />
+<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/top_10_authors.jpeg?raw=true" alt="description" width="800" />
 
 ### And lastly what about the top 10 genres with the most books?
 <img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/top_10_genres.png?raw=true" alt="description" width="800" />
-### Items Metadata
-- Metadata includes title, author, genre, publisher, synopsis (in French).
-- External APIs were used to enrich metadata with additional details.
+
+This plot shows results that align with the list of the 10 most popular books. Here, you can see the unbalanced distribution of genres in our library. Indeed, comics and manga books are the most prevalent. 
+
+### Any missing values in the dataset provided by Kaggle?
+There are a quite a few NaN values in our book Metadata.
+- Missing `Author`: `2,653`
+- Missing `Subjects`: `2,223`
+- Missing `ISBN`: `723`
+- Missing `Publisher`: `25`
+
+Therefore, we used API requests to fill in the as many missing values as possible, and add other info, such as the abstract and the url link of the book cover in order to respresent them in our app.
+
+## Let's explore our extended data
+### Any remaining missing values?
+Thanks to the data completion and augmentation, we significantly narrowed down the number of missing values, particularly for the `Author` and the `Subjects` categories.
+- Missing `Author`: `402`
+- Missing `Subjects`: `475`
+- Missing `ISBN`: `723`
+- Missing `Publisher`: `15`
+
+### Let's see if the most prevalent genres in the library are still the same, now that we know more about our library
+<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/top_10_genres_2.png?raw=true" alt="description" width="800" />
+
+Interestingly, we can see now that, albeit comics being still Top 1, we also have a lot of fiction books.
+
+## Methodology
+
+First, we built a few basic models, Item-Item Collaborative Filtering, User-User Collaborative Filtering and Content-Based Filtering, on the data provided by Kaggle. 
+
+### Data Split
+We split our data
 
 ## Model Comparison
 
