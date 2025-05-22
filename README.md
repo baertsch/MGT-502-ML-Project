@@ -17,8 +17,12 @@ RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.strea
 **[Exploratory Data Analysis](#eda)**<br>
 **[Methodology](#methodology)**<br>
 **[Our Models](#our-models)**<br>
-**[First Model: User-User Collaborative Filtering](#first-model)**<br>
-
+**[First Model: Item-Item Collaborative Filtering](#first-model)**<br>
+**[Second Model: User-User Collaborative Filtering](#second-model)**<br>
+**[Third Model: Frequency-Based Collaborative Filterings](#third-model)**<br>
+**[Fourth Model: Content-Based Filtering ](#fourth-model)**<br>
+**[Fifth Model: Content-Based Filtering from Text Embeddings](#fifth-model)**<br>
+**[Last Model: Hybrid Model](#last-model)**<br>
 
 --- 
 
