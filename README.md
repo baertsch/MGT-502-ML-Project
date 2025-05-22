@@ -3,7 +3,8 @@
 __Group Tissot: Nadège Baertschi & Zélia Décaillet__
 _May 2025_
 
-<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/app/image/Logo.png?raw=true" alt="description" width="500" />
+<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/app/image/Logo.png?raw=true" alt="description" width="300" />
+
 # ReadingBuddy: Recommendation System for Book Rentals
 
 RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.streamlit.app/)
