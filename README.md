@@ -128,11 +128,11 @@ This matrix is the core structure on which our collaborative filtering models op
 
 To better understand the data structure, we visualized the matrix as a **heatmap**, revealing clusters of active users and popular items, as well as the sparsity of the dataset—typical of recommendation systems.
 
-### Our Models
+## Our Models
 **Now that our ingredients are ready, let the cooking begin!
 
-#### First Model 
-##### Item-Item Collaborative Filtering with Implicit Feedback
+### First Model 
+#### Item-Item Collaborative Filtering with Implicit Feedback
 In this approach, we calculate the **cosine similarity** between items based on user interactions. The idea is that if a user interacted with item $i'$, and item $i$ is similar to $i'$, the user might also like $i$.
 
 The predicted likelihood that user $u$ will interact with item $i$ is given by:
@@ -149,10 +149,8 @@ $$
 
 This value $P_u(i)$ lies between 0 and 1, and represents how strong the recommendation is.
 
----
-
-#### Second Model
-##### User-User Collaborative Filtering
+### Second Model
+#### User-User Collaborative Filtering
 
 Next, we explored the **user-user collaborative filtering** approach. Here, we compute the **cosine similarity** between users based on their item interactions.
 
@@ -170,8 +168,97 @@ $$
 - $R_{u'}(i)$: 1 if user $u'$ interacted with item $i$, 0 otherwise
 - $U$: set of all users
 
----
+### Third Model
+#### From Binary to Frequency-Based Collaborative Filtering
 
+To enrich the signal captured by our collaborative models, we replaced the binary interaction matrix (where 1 = interaction, 0 = no interaction) with a **frequency matrix**. In this matrix, each entry represents the **number of times** a user interacted with a given item.
+
+This approach allows us to model **user engagement intensity** rather than just interaction presence. For example, a user who borrowed a book 10 times likely values it more than one they borrowed once.
+
+We kept the same prediction function as in item-item collaborative filtering:
+
+$$
+P_u(i) = \frac{\sum\limits_{i' \in I} \text{sim}(i, i') \cdot R_u(i')}{\sum\limits_{i' \in I} \text{sim}(i, i')}
+$$
+
+Where:
+- $R_u(i')$ is now the **number of interactions** between user $u$ and item $i'$
+- All other terms remain the same
+
+This simple adjustment gave our models a **more nuanced understanding** of preferences, particularly for users with rich interaction histories.
+
+### Fourth Model
+#### Content-Based Filtering Using Metadata
+
+Next, we explored a **content-based approach**, which relies solely on item features (metadata) to drive recommendations.
+
+We experimented with different combinations of available metadata:
+- Title
+- Subjects
+- Author
+- Publisher
+- Synopsis
+
+After empirical testing, we found that the best performance came from combining:
+**`Title + Subjects + Author + Publisher`**
+
+We concatenated the selected metadata fields into a single text string per book. Then we applied a **TF-IDF vectorizer**, which transforms the text into a numerical representation that captures the importance of terms across the corpus.
+
+- Common words across many books are down-weighted
+- Unique or distinguishing terms are given higher importance
+
+This resulted in a high-dimensional **TF-IDF matrix**, where each row corresponds to a book and each column represents a term.n
+
+We then computed **cosine similarity** between these TF-IDF vectors to measure how "alike" two books are in content. we used the **same prediction formula** as in item-item collaborative filtering:
+
+$$
+P_u(i) = \frac{\sum\limits_{i' \in I} \text{sim}(i, i') \cdot R_u(i')}{\sum\limits_{i' \in I} \text{sim}(i, i')}
+$$
+
+Here, the similarity $\text{sim}(i, i')$ is **content-based**, not interaction-based. This approach proved particularly valuable for:
+- **Cold-start books** with no interaction history
+- Capturing semantic relevance between books
+---
+### Fifth Model
+#### Text Embeddings with Transformer Models
+
+To go beyond the limitations of TF-IDF and better capture the **semantic meaning** of the metadata, we turned to **sentence transformers**.
+
+We reused the same metadata structure as in the content-based model:
+**`Title + Subjects + Author + Publisher`**
+
+Each book's metadata was passed through a **pretrained SentenceTransformer model**, which encoded it into a dense vector embedding that captures rich semantic relationships between texts.
+
+These **contextualized embeddings** outperform traditional bag-of-words methods by understanding nuance, such as:
+- Synonyms (e.g., "thriller" vs. "suspense")
+- Word order and contextual meaning
+- Named entity similarities (e.g., similar author names)
+
+After generating the book embeddings, we applied **cosine similarity** between books to measure content closeness—just like in the TF-IDF-based model.
+
+We then predicted user preferences using the same formula as before:
+
+$$
+P_u(i) = \frac{\sum\limits_{i' \in I} \text{sim}(i, i') \cdot R_u(i')}{\sum\limits_{i' \in I} \text{sim}(i, i')}
+$$
+
+
+### Last Model
+#### Hybrid Recommender System
+
+Lastly, we experimented with **hybridization**—the process of combining multiple models to leverage their individual strengths.
+
+After extensive testing, we discovered that the **best-performing combination** came from integrating predictions from:
+
+- **User-user collaborative filtering** using frequency-based matrix  
+- **Item-item collaborative filtering** using frequency-based matrix  
+- **TF-IDF content-based filtering**
+
+We assigned a weight to each model's predicted matrix and used a **grid search** approach to loop through possible weight combinations between 0 and 1 (ensuring their sum equals 1):
+
+```python
+hybrid_pred = user_model * w1 + item_model * w2 + content_model * w3
+```
 ## Model Comparison
 | Model                                | Precision@10 | Recall@10 |
 |--------------------------------------|--------------|-----------|
