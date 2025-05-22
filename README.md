@@ -13,19 +13,36 @@ RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.strea
 ---
 
 ## Introduction
-This project builds a recommendation system for a book rental platform. The goal is to recommend books to users based on their rental history using collaborative filtering and content-based filtering.
+> **When we read for leisure, everything is about discovery.**  
+The joy of stumbling upon a story that grips us, a world we don’t want to leave, or a character that resonates—this is what makes reading magical. Yet, with so many books out there, finding that *perfect* next read can feel overwhelming. **ReadingBuddy** is here to make that discovery seamless and delightful.
+
+> **When we read for education or research, discovery becomes essential.**  
+The right book, the right reference, the right voice—these are not just helpful; they’re critical. But combing through massive catalogs, outdated systems, or relying solely on keyword search can be inefficient and frustrating. **ReadingBuddy** streamlines this process, helping users surface relevant sources efficiently and intelligently.
+
+Whether you're a passionate reader, a student, or a researcher, **ReadingBuddy is your AI-powered companion**, helping you uncover books that matter—*to you*.
+
+## Dataset Provided by Kaggle
+
+The dataset powering ReadingBuddy consists of:
+
+- **87047 user-book interactions** with timestamps.
+- **7,838 users**, which have all together interacted with **15,109 books**.
+- **15,291 unique books** in the library, which means **182 books** have not been read by anyone from the dataset yet.
+- Metadata for each book: `Title`, `Author`, `Publisher`, `Subjects`, `ISBN`
 
 ## Exploratory Data Analysis (EDA)
 
-Our project uses a rich dataset containing:
+Before diving into modeling, we explored our data deeply to understand its shape, quality, and potential.
 
-- **87047 user-book interactions** with timestamps
-- **7,838 users**, which have all together interacted with **15,109 books**
-- **15,291 unique books** in the library, which means **182 books** have not been read by anyone from the dataset yet
+### Let's see first how users interact with the library:
+- **Average number of interactions per user**: `11.11`  
+- **Median interactions per user**: `6`  
+- **Maximum interactions (most active user)**: `385`  
+- **Minimum**: `3`
+Most users engage with a relatively small number of books, indicating a **sparse user-item interaction matrix**—a classic trait in recommendation systems that requires careful modeling.
+This discrepancy between the average and the median can be explained by the skewed, unbalanced distribution of interactions. A small number of highly active users,who have interacted with hundreds of books, are pulling the average up significantly.
 
-#### Key Findings:
-- Most users have rented only a few books, with an average of 11.11 interactions per use, 
-- Popular books have been rented significantly more than others.
+
 
 ### Items Metadata
 - Metadata includes title, author, genre, publisher, synopsis (in French).
