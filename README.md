@@ -25,9 +25,9 @@ Whether you're a passionate reader, a student, or a researcher, **ReadingBuddy i
 
 The dataset powering ReadingBuddy consists of:
 
-- **87047 user-book interactions** with timestamps.
-- **7,838 users**, which have all together interacted with **15,109 books**.
-- **15,291 unique books** in the library, which means **182 books** have not been read by anyone from the dataset yet.
+- `87047` user-book interactions with timestamps.
+- `7,838` users, which have all together interacted with `15,109` books.
+- `15,291` unique books in the library, which means `182` books have not been read by anyone from the dataset yet.
 - Metadata for each book: `Title`, `Author`, `Publisher`, `Subjects`, `ISBN`
 
 ## Exploratory Data Analysis (EDA)
@@ -41,8 +41,17 @@ Before diving into modeling, we explored our data deeply to understand its shape
 - **Minimum**: `3`
 Most users engage with a relatively small number of books, indicating a **sparse user-item interaction matrix**—a classic trait in recommendation systems that requires careful modeling.
 This discrepancy between the average and the median can be explained by the skewed, unbalanced distribution of interactions. A small number of highly active users,who have interacted with hundreds of books, are pulling the average up significantly.
+<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/interactions_per_user.png?raw=true" alt="description" width="800" />
 
 
+### What about the number of interactions per item?
+- **Average number of interactions per item**: `5.69`  
+- **Median interactions per user**: `4`  
+- **Maximum interactions (most active user)**: `380`  
+- **Minimum**: `0`
+- **Number of books never interacted with**: `182`
+<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/interactions_per_item.png?raw=true" alt="description" width="800" />
+This shows a typical **long-tail distribution**, where a few popular books are heavily engaged with, while most remain under the radar.
 
 ### Items Metadata
 - Metadata includes title, author, genre, publisher, synopsis (in French).
