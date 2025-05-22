@@ -69,10 +69,13 @@ We analyzed which books users engaged with the most:
 | 9    | Pons Kompaktwörterbuch      | _N/A_               | French-German Dictionary      |
 | 10   | Tokyo Revengers             | Wakui, Ken          | Manga                         |
 
-More details, such as book covers, can be found on the home page of our app. Go check it out! You can notice the popularity of Manga books!
+More details, such as book cover and abstract, can be found on the home page of our app. Go check it out! You can also notice the popularity of Manga books!
 
 ### What about the top 10 Authors with the most books?
+<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/top_10_auhtors.png?raw=true" alt="description" width="800" />
 
+### And lastly what about the top 10 genres with the most books?
+<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/top_10_genres.png?raw=true" alt="description" width="800" />
 ### Items Metadata
 - Metadata includes title, author, genre, publisher, synopsis (in French).
 - External APIs were used to enrich metadata with additional details.
