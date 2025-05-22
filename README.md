@@ -16,6 +16,10 @@ RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.strea
 **[Introduction](#introduction)**<br>
 **[Exploratory Data Analysis](#eda)**<br>
 **[Methodology](#methodology)**<br>
+**[Our Models](#our-models)**<br>
+**[First Model: User-User Collaborative Filtering](#first-model)**<br>
+
+
 --- 
 
 ## Introduction
