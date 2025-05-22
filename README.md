@@ -7,7 +7,7 @@ _May 2025_
 <img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/app/image/Logo.png?raw=true" alt="description" width="300" />
 
 # ReadingBuddy: Recommendation System for Book Rentals
-> _"Find your next favorite book with ease!"_
+> _"Let ReadingBuddy help you find your next read!"_
 
 RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.streamlit.app/)
 ---
@@ -19,12 +19,12 @@ This project builds a recommendation system for a book rental platform. The goal
 
 Our project uses a rich dataset containing:
 
-- **7,838 users**
-- **15,291 unique books**
 - **87047 user-book interactions** with timestamps
+- **7,838 users**, which have all together interacted with **15,109 books**
+- **15,291 unique books** in the library, which means **182 books** have not been read by anyone from the dataset yet
 
 #### Key Findings:
-- Most users have rented only a few books.
+- Most users have rented only a few books, with an average of 11.11 interactions per use, 
 - Popular books have been rented significantly more than others.
 
 ### Items Metadata
