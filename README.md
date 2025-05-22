@@ -135,7 +135,7 @@ Next, we constructed a **binary user-item interaction matrix**:
 This matrix is the core structure on which our collaborative filtering models operate.
 
 To better understand the data structure, we visualized the matrix as a **heatmap**, revealing clusters of active users and popular items, as well as the sparsity of the dataset—typical of recommendation systems.
-
+---
 ## Our Models
 **Now that our ingredients are ready, let the cooking begin!
 
@@ -156,7 +156,7 @@ $$
 - $I$: set of all items
 
 This value $P_u(i)$ lies between 0 and 1, and represents how strong the recommendation is.
-
+---
 ### Second Model
 #### User-User Collaborative Filtering
 
@@ -175,7 +175,7 @@ $$
 - $\text{sim}(u, u')$: cosine similarity between users $u$ and $u'$
 - $R_{u'}(i)$: 1 if user $u'$ interacted with item $i$, 0 otherwise
 - $U$: set of all users
-
+---
 ### Third Model
 #### From Binary to Frequency-Based Collaborative Filtering
 
@@ -194,7 +194,7 @@ Where:
 - All other terms remain the same
 
 This simple adjustment gave our models a **more nuanced understanding** of preferences, particularly for users with rich interaction histories.
-
+---
 ### Fourth Model
 #### Content-Based Filtering Using Metadata
 
@@ -250,7 +250,7 @@ $$
 P_u(i) = \frac{\sum\limits_{i' \in I} \text{sim}(i, i') \cdot R_u(i')}{\sum\limits_{i' \in I} \text{sim}(i, i')}
 $$
 
-
+---
 ### Last Model
 #### Hybrid Recommender System
 
@@ -267,13 +267,18 @@ We assigned a weight to each model's predicted matrix and used a **grid search**
 ```python
 hybrid_pred = user_model * w1 + item_model * w2 + content_model * w3
 ```
+---
 ## Model Comparison
-| Model                                | Precision@10 | Recall@10 |
-|--------------------------------------|--------------|-----------|
-| User-User Collaborative Filtering    | 0.45         | 0.38      |
-| Item-Item Collaborative Filtering    | 0.52         | 0.42      |
-| Content-Based Filtering              | 0.47         | 0.40      |
-| Hybrid Model                         | 0.55         | 0.48      |
+| Model                                                           | Precision@10 | Recall@10 |
+|-----------------------------------------------------------------|--------------|-----------|
+| Model 1: Item-Item Collaborative Filtering                      | 0.45         | 0.38      |
+| Model 2: User-User Collaborative Filtering                      | 0.52         | 0.42      |
+| Model 3.1: Item-Item Collaborative Filtering (Frequency-Based)  | 0.47         | 0.40      |
+| Model 3.2: User-User Collaborative Filtering (Frequency-Based)  | 0.47         | 0.40      |
+| Model 4.1: Content-Based Filtering (data from Kaggle)           | 0.47         | 0.40      |
+| Model 4.2: Content-Based Filtering (more complete data)         | 0.47         | 0.40      |
+| Model 5: Text Embeddings (complete data)                        | 0.47         | 0.40      |
+| Model 6: Hybrid Model                                           | 0.55         | 0.48      |
 
 ### Hyperparameter Optimization
 Best model: **Hybrid Model** combining item-item CF and content-based filtering.
