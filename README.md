@@ -9,7 +9,8 @@ _May 2025_
 # ReadingBuddy: Recommendation System for Book Rentals
 > _"Let ReadingBuddy help you find your next read!"_
 
-RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.streamlit.app/)
+RUNNING AT: [click here to see app](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.streamlit.app/)
+SEE OUR VIDEO ON: [click here to see video]()
 ---
 
 ## Table of Contents
@@ -22,6 +23,7 @@ RUNNING AT: [click here](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.strea
 **[Third Model: Frequency-Based Collaborative Filterings](#third-model)**<br>
 **[Fourth Model: Content-Based Filtering ](#fourth-model)**<br>
 **[Fifth Model: Content-Based Filtering from Text Embeddings](#fifth-model)**<br>
+**[Last Model: Hybrid Model](#last-model)**<br>
 **[Last Model: Hybrid Model](#last-model)**<br>
 
 --- 
@@ -254,7 +256,7 @@ $$
 ### Last Model
 #### Hybrid Recommender System
 
-Lastly, we experimented with **hybridization**—the process of combining multiple models to leverage their individual strengths.
+Lastly, we experimented with **hybridization**—the process of combining multiple of our previous models to leverage their individual strengths.
 
 After extensive testing, we discovered that the **best-performing combination** came from integrating predictions from:
 
@@ -262,7 +264,7 @@ After extensive testing, we discovered that the **best-performing combination** 
 - **Item-item collaborative filtering** using frequency-based matrix  
 - **TF-IDF content-based filtering**
 
-We assigned a weight to each model's predicted matrix and used a **grid search** approach to loop through possible weight combinations between 0 and 1 (ensuring their sum equals 1):
+We assigned a weight to each model's predicted matrix and used a loop through possible weight combinations between 0 and 1 (ensuring their sum equals 1):
 
 ```python
 hybrid_pred = user_model * w1 + item_model * w2 + content_model * w3
@@ -271,19 +273,16 @@ hybrid_pred = user_model * w1 + item_model * w2 + content_model * w3
 ## Model Comparison
 | Model                                                           | Precision@10 | Recall@10 |
 |-----------------------------------------------------------------|--------------|-----------|
-| Model 1: Item-Item Collaborative Filtering                      | 0.45         | 0.38      |
-| Model 2: User-User Collaborative Filtering                      | 0.52         | 0.42      |
-| Model 3.1: Item-Item Collaborative Filtering (Frequency-Based)  | 0.47         | 0.40      |
-| Model 3.2: User-User Collaborative Filtering (Frequency-Based)  | 0.47         | 0.40      |
-| Model 4.1: Content-Based Filtering (data from Kaggle)           | 0.47         | 0.40      |
-| Model 4.2: Content-Based Filtering (more complete data)         | 0.47         | 0.40      |
-| Model 5: Text Embeddings (complete data)                        | 0.47         | 0.40      |
-| Model 6: Hybrid Model                                           | 0.55         | 0.48      |
+| Model 1: Item-Item Collaborative Filtering                      | 0.0535       | 0.2651    |
+| Model 2: User-User Collaborative Filtering                      | 0.0542       | 0.2921    |
+| Model 3.1: Item-Item Collaborative Filtering (Frequency-Based)  | 0.0538       | 0.2647    |
+| Model 3.2: User-User Collaborative Filtering (Frequency-Based)  | 0.0573       | 0.2892    |
+| Model 4.1: Content-Based Filtering (data from Kaggle)           | 0.0374       | 0.2113    |
+| Model 4.2: Content-Based Filtering (more complete data)         | 0.0411       | 0.2343    |
+| Model 5: Text Embeddings (complete data)                        | 0.0372       | 0.2656    |
+| Model 6: Hybrid Model  (Model 3.1 + Model 3.2 + Model 4.2)      | 0.0591       | 0.2955    |
 
-### Hyperparameter Optimization
-Best model: **Hybrid Model** combining item-item CF and content-based filtering.
-
-## Which Model is the Best?
+### Which Model is the Best?
 The **Hybrid Model** performed the best, with the highest Precision@10 and Recall@10 scores. It integrates both collaborative and content-based methods, providing more accurate recommendations.
 
 ## Example Recommendations
@@ -294,7 +293,6 @@ The **Hybrid Model** performed the best, with the highest Precision@10 and Recal
 ### Bad Predictions:
 - User 2: Recommended a non-fiction book despite the user's history with fiction books.
 
-## Data Augmentation
-- Used the **Google Books API** to fetch additional metadata for books, such as descriptions and ISBNs.
+
 
 
