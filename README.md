@@ -27,7 +27,7 @@ SEE OUR VIDEO ON: [click here to see video]()
 **[Fifth Model: Content-Based Filtering from Text Embeddings](#fifth-model)**<br>
 **[Last Model: Hybrid Model](#last-model)**<br>
 **[Model Comparison](#model-comparison)**<br>
-**[Example Recommendations](#model-comparison)**<br>
+**[Example Recommendations](#example-recommendations)**<br>
 
 
 --- 
@@ -292,16 +292,110 @@ hybrid_pred = user_model * w1 + item_model * w2 + content_model * w3
 | Model 5: Text Embeddings (complete data)                        | 0.0372       | 0.2656    |
 | Model 6: Hybrid Model  (Model 3.1 + Model 3.2 + Model 4.2)      | 0.0591       | 0.2955    |
 
+While comparing our models using metrics like **Precision@10** and **Recall@10**, we observed that the scores remained relatively low across all models. This may initially suggest underperformance, but it's crucial to interpret these metrics in the context of our dataset and evaluation design.
+
+On average, each user in the **test set** has only **2.61 interactions**. That means even in the best-case scenario—where the top-10 recommendations are perfect, only about **2 or 3 books can actually be found in the test set** to count as "relevant" recommendations.
+
+This creates a natural ceiling for our precision and recall metrics:
+- **Precision@10** is capped by the fact that only ~2 of the 10 recommended items *could possibly* be matched in the test set.
+- **Recall@10** is likewise limited, because we're measuring against a very small number of actual test interactions.
+
+In short: **we’re evaluating how well our models can recover ~2 known books from a list of 10**—not how useful or meaningful the rest of the list might be to the user in a real setting.
+
+This means our **absolute scores may be low**, but the **relative differences between models remain meaningful**, and help us identify the strongest approaches.
+
 ### Which Model is the Best?
 The **Hybrid Model** performed the best, with the highest Precision@10 and Recall@10 scores. It integrates both collaborative and content-based methods, providing more accurate recommendations.
 
 ## Example Recommendations
+Let’s consider  real examples from our model.
+### Example 1:
+One standout example of model success is seen with **User 24**, whose reading history reveals a clear thematic focus on **sociocultural animation**, **social work**, and **qualitative research methods**.
 
-### Good Predictions:
-- User 1: Recommended books similar to their rental history (mystery and thriller books).
+**User 24’s Reading History Includes:**
+- *Enjeux des territoires pour l'animation socioculturelle*
+- *L'écologisation du travail social*
+- *Les limites à la croissance*
+- *Les méthodes qualitatives*
+- *Guide de l’enquête de terrain*
+- *L’animation professionnelle*
+- *L’animation socioculturelle*
+- *Intervention sociale et animation*
+- *Les animateurs socioculturels*
+- *Animation et animateurs : le sens de l'action*
+- *Animation socioculturelle : pratiques multiples*
+- *Conceptualiser l’animation socioculturelle*
+- *L’animation socioculturelle : fondements, modèles, pratiques*
 
-### Bad Predictions:
-- User 2: Recommended a non-fiction book despite the user's history with fiction books.
+This user demonstrates highly specialized interest in **social sciences**, particularly within the **field of sociocultural animation**, a niche academic and professional area.
+
+**Model Recommendations for User 24:**
+
+The system recommended titles such as:
+
+- *L'écologisation du travail social*
+- *Animation socioculturelle professionnelle*
+- *L’animation professionnelle*
+- *Intervention sociale et animation*
+- *Conceptualiser l’animation socioculturelle*
+- *L’animation socioculturelle : fondements, modèles, pratiques*
+
+Not only are these books **contextually relevant**, but many of them are either:
+- **Books the user had already read**, indicating strong alignment with their known preferences
+- **Closely related titles** authored by other professionals in the same field, published by the same academic presses (e.g. Éditions IES, L’Harmattan, La Découverte)
+
+**Why This Is a Good Recommendation Case:**
+
+- **Topical consistency**: The model correctly identifies books that belong to the exact field the user is engaged with.
+- **No generic or irrelevant titles**: Unlike generic bestsellers, the recommendations are academic, niche, and specific.
+- **Content alignment**: These books share overlapping keywords, themes, and publishers—attributes captured effectively by the content-based filtering component of the model.
+- **Collaborative reinforcement**: The model likely picked up co-reading patterns from users with similar profiles.
+
+**What This Shows:**
+
+This example highlights the **strength of the hybrid model**:
+- **Content-based filtering** helps when the user's interests are specialized and not shared by many.
+- **Collaborative filtering** contributes by reinforcing connections to highly relevant items.
+- **Frequency-aware predictions** help prioritize books that were not just interacted with, but returned to multiple times.
+
+In real use cases like this one, **ReadingBuddy** shows its ability to **support deep exploration of a topic**, ideal for students, researchers, and professionals working within a specific field.
+
+---
+### Example 2:
+User 5805 with strong engagement in media, communication, and sociopolitical themes had interacted with the following books:
+
+- *Planète médias: géopolitique des réseaux* by Philippe Boulanger  
+- *Médias publics et société numérique* by Patrick-Yves Badillo  
+- *Les fabuleux pouvoirs de l'hypnose* by Betty Mamane  
+- *L'explosion de la communication* by Philippe Breton  
+- *Pratique du marketing* by François Courvoisier  
+- *Le Petit Robert* (specific edition)
+
+However, when looking at the top-10 recommendations for this user, several versions of **“Le Petit Robert”** appeared, often in different editions or formats. While this might seem reasonable at first—since the user did interact with one edition—the list was **overpopulated by variations of the same book**.
+
+#### Why this happened
+
+This is a clear case where our model reveals a **limitation stemming from data duplication**. In our dataset, multiple records exist for nearly identical items—like “Le Petit Robert”, that vary slightly in metadata (different authors listed, new ISBNs, minor changes in description or formatting).
+
+Because our models (especially the content-based and item-item collaborative filtering ones) rely heavily on textual metadata and co-interaction patterns, they treat these as **distinct but highly similar items**. As a result:
+- The **content-based similarity score** is very high between these versions
+- The model treats each version as a unique but highly recommended item
+- This leads to **redundant recommendations**, occupying valuable space in the top-k list
+
+#### What it means
+
+This behavior is not necessarily an error—it's an expected outcome of how the model computes similarity, but it reduces the **diversity and usefulness** of recommendations. The user is essentially being told to re-read the same book in slightly different wrappers.
+
+---
+
+### Conclusion
+
+Unsurprisingly, our model performs best when the user exhibits **clear and specific preferences**. In the case of User 24, the consistent focus on a single domain, sociocultural animation—allowed the model to identify and recommend highly relevant books with precision and confidence.
+
+On the other hand, users with **diverse or scattered reading interests** may receive recommendations biased toward the **most popular category** they’ve touched. This is particularly evident when one topic dominates the interaction matrix or metadata is duplicated across many editions of a popular book. In such cases, the model tends to **over-recommend items from dominant clusters**, potentially crowding out equally relevant but less represented subjects.
+
+This reinforces the idea that **content-based and collaborative filtering approaches excel when user intent is focused**, and highlights an opportunity for future improvements in **diversity-aware recommendation strategies**.
+
 
 
 
