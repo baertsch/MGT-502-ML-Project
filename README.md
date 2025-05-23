@@ -11,7 +11,7 @@ _May 2025_
 
 RUNNING AT: [click here to see app](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.streamlit.app/)
 
-SEE OUR VIDEO ON: [click here to see video]()
+SEE OUR VIDEO ON: [click here to see video](https://youtu.be/bnvc_jrA6es)
 
 ---
 
