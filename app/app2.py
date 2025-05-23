@@ -16,7 +16,7 @@ st.markdown(
 )
 
 
-url = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/recommendations/hybrid_recommendation3.csv'
+url = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/recommendations/hybrid_recommendations3.csv'
 read = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/interactions_train.csv'
 item = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/items_df.csv'
 data = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/recommendations/item_to_item_recommendations.csv'
