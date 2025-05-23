@@ -16,10 +16,10 @@ st.markdown(
 )
 
 
-url = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/hybrid_recommendation3.csv'
+url = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/recommendations/hybrid_recommendation3.csv'
 read = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/interactions_train.csv'
 item = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/kaggle_data/items_df.csv'
-data = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/item_to_item_recommendations.csv'
+data = 'https://raw.githubusercontent.com/baertsch/MGT-502-ML-Project/refs/heads/main/recommendations/item_to_item_recommendations.csv'
 logo = 'https://github.com/baertsch/MGT-502-ML-Project/blob/main/app/image/Logo.png?raw=true'
 book_cover = 'https://github.com/baertsch/MGT-502-ML-Project/blob/main/app/image/book_cover.png?raw=true'
 
