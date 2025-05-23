@@ -10,7 +10,9 @@ _May 2025_
 > _"Let ReadingBuddy help you find your next read!"_
 
 RUNNING AT: [click here to see app](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.streamlit.app/)
+
 SEE OUR VIDEO ON: [click here to see video]()
+
 ---
 
 ## Table of Contents
@@ -24,7 +26,9 @@ SEE OUR VIDEO ON: [click here to see video]()
 **[Fourth Model: Content-Based Filtering ](#fourth-model)**<br>
 **[Fifth Model: Content-Based Filtering from Text Embeddings](#fifth-model)**<br>
 **[Last Model: Hybrid Model](#last-model)**<br>
-**[Last Model: Hybrid Model](#last-model)**<br>
+**[Model Comparison](#model-comparison)**<br>
+**[Example Recommendations](#model-comparison)**<br>
+
 
 --- 
 
@@ -139,7 +143,9 @@ This matrix is the core structure on which our collaborative filtering models op
 To better understand the data structure, we visualized the matrix as a **heatmap**, revealing clusters of active users and popular items, as well as the sparsity of the dataset—typical of recommendation systems.
 
 Here, you can see a snippet of it. 
+
 <img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/heatmap1.png?raw=true" alt="description" width="800" />
+
 For example, this matrix show that user 0 has interacted with many of the first books of the librabry.
 ---
 ## Our Models
