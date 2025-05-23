@@ -88,7 +88,7 @@ We analyzed which books users engaged with the most:
 More details, such as book cover and abstract, can be found on the home page of our app. Go check it out! You can also notice the popularity of Manga books!
 
 ### What about the top 10 Authors with the most books?
-<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/top_10_authors.jpeg?raw=true" alt="description" width="800" />
+<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/top_10_authors.png?raw=true" alt="description" width="800" />
 
 ### And lastly what about the top 10 genres with the most books?
 <img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/top_10_genres.png?raw=true" alt="description" width="800" />
@@ -113,7 +113,7 @@ Thanks to the data completion and augmentation, we significantly narrowed down t
 - Missing `Publisher`: `15`
 
 ### Let's see if the most prevalent genres in the library are still the same, now that we know more about our library
-<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/top_10_genres_2.png?raw=true" alt="description" width="800" />
+<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/top_10_genres2.png?raw=true" alt="description" width="800" />
 
 Interestingly, we can see now that, albeit comics being still Top 1, we also have a lot of fiction books.
 
@@ -137,6 +137,10 @@ Next, we constructed a **binary user-item interaction matrix**:
 This matrix is the core structure on which our collaborative filtering models operate.
 
 To better understand the data structure, we visualized the matrix as a **heatmap**, revealing clusters of active users and popular items, as well as the sparsity of the dataset—typical of recommendation systems.
+
+Here, you can see a snippet of it. 
+<img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/heatmap1.png?raw=true" alt="description" width="800" />
+For example, this matrix show that user 0 has interacted with many of the first books of the librabry.
 ---
 ## Our Models
 **Now that our ingredients are ready, let the cooking begin!
