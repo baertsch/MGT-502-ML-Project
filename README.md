@@ -139,7 +139,9 @@ This matrix is the core structure on which our collaborative filtering models op
 To better understand the data structure, we visualized the matrix as a **heatmap**, revealing clusters of active users and popular items, as well as the sparsity of the dataset—typical of recommendation systems.
 
 Here, you can see a snippet of it. 
+
 <img src="https://github.com/baertsch/MGT-502-ML-Project/blob/main/plots/heatmap1.png?raw=true" alt="description" width="800" />
+
 For example, this matrix show that user 0 has interacted with many of the first books of the librabry.
 ---
 ## Our Models
