@@ -26,7 +26,9 @@ SEE OUR VIDEO ON: [click here to see video]()
 **[Fourth Model: Content-Based Filtering ](#fourth-model)**<br>
 **[Fifth Model: Content-Based Filtering from Text Embeddings](#fifth-model)**<br>
 **[Last Model: Hybrid Model](#last-model)**<br>
-**[Last Model: Hybrid Model](#last-model)**<br>
+**[Model Comparison](#model-comparison)**<br>
+**[Example Recommendations](#model-comparison)**<br>
+
 
 --- 
 
