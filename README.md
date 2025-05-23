@@ -10,7 +10,9 @@ _May 2025_
 > _"Let ReadingBuddy help you find your next read!"_
 
 RUNNING AT: [click here to see app](https://mgt-502-ml-project-b9gvc6qsrd9qs39qmkbogq.streamlit.app/)
+
 SEE OUR VIDEO ON: [click here to see video]()
+
 ---
 
 ## Table of Contents
