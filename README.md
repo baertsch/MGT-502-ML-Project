@@ -28,6 +28,7 @@ SEE OUR VIDEO ON: [click here to see video](https://youtu.be/bnvc_jrA6es)
 **[Last Model: Hybrid Model](#last-model)**<br>
 **[Model Comparison](#model-comparison)**<br>
 **[Example Recommendations](#example-recommendations)**<br>
+**[Required libraries](#required-libraries)
 
 
 --- 
@@ -396,7 +397,12 @@ On the other hand, users with **diverse or scattered reading interests** may rec
 
 This reinforces the idea that **content-based and collaborative filtering approaches excel when user intent is focused**, and highlights an opportunity for future improvements in **diversity-aware recommendation strategies**.
 
+---
 
+## Required libraries
+- pandas
+- numpy
+- 
 
 
 
