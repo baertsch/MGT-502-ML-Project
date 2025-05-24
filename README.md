@@ -406,6 +406,7 @@ This reinforces the idea that **content-based and collaborative filtering approa
 - seaborn
 - matplotlib
 - os
+- sentence_transformers
 
 
 
