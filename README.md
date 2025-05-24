@@ -402,7 +402,10 @@ This reinforces the idea that **content-based and collaborative filtering approa
 ## Required libraries
 - pandas
 - numpy
-- 
+- sklearn
+- seaborn
+- matplotlib
+- os
 
 
 
